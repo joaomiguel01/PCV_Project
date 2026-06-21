@@ -1,19 +1,25 @@
-from stopwatch import Stopwatch, QApplication
+from stopwatch import Stopwatch
+from problem import random_array_problem
+from method_1 import brute_force
+from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QThread, pyqtSignal
 import sys
-from time import sleep
 
 class Worker(QThread):
     finish_signal = pyqtSignal()
     def run(self):
-        # Insert the solution here
-        for i in range(10):
-            sleep(1)
-            print(i)
-        
+        # Setup problem
+        array = random_array_problem(15)
+        for i in range(len(array)):
+            print(array[i], '\n')
+
+        # Method
+        best_way, total_cost = brute_force(array)
+
+        print(f"\n\n\nThe best way:{best_way}\nTotal cost: {total_cost}")
+
         self.finish_signal.emit()
-        
-            
+
 
 if __name__ == "__main__":
     # Stopwatch
