@@ -1,6 +1,6 @@
 from stopwatch import Stopwatch
 from problem import random_array_problem
-from method_2 import nearest_neighbor
+from method_3 import bellman_held_karp
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QThread, pyqtSignal
 import sys
@@ -9,10 +9,10 @@ class Worker(QThread):
     finish_signal = pyqtSignal()
     def run(self):
         # Setup problem
-        array = random_array_problem(10000)
+        array = random_array_problem(20)
 
         # Method
-        best_way, total_cost = nearest_neighbor(array)
+        best_way, total_cost = bellman_held_karp(array)
         self.finish_signal.emit()
 
         # Print Array
